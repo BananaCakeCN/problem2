@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Problem Index 1</title>
+        <style>
+            @keyframes hide {
+                100%{
+                    transform: translateY(-50px);
+                    filter: opacity(0);
+                }
+            }
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                margin: 0;
+            }
+            #start{
+                height: 100%;
+                width: 100%;
+                position: fixed;
+                background-color: #fff;
+            }
+            p, span, h1, h2, h3{
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+            #example{
+                float: right;
+                right: 50px;
+                position: absolute;
+            }
+            #startBTN{
+                width: 250px;
+                background-color: #1a5ded;
+                border-radius: 15px;
+                padding: 15px;
+                color: #fff;
+                text-align: center;
+                font-size: 20px;
+                margin: 20px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            #startBTN:hover{
+                background-color: #0037db;
+            }
+            #content{
+                position: absolute;
+                width: 100%;
+
+            }
+            exponent{
+                position: relative;
+                bottom: 1.5ex;
+                font-size: 50%;
+            }
+            #explainGraph{
+                margin-left: 20px;
+                position: fixed;
+                right: 20px;
+            }
+            td, th{
+                border: 1px solid #000;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <h1>Solving this question</h1>
+            <h2>Think by starting from Pirate 5 only</h2>
+            <p>In order to solve this question. We have to predict what would happened if other pirates vote against. Which means we have to think backwards, becaue the pirate will have to make other priates admit your plan by telling them a better plan than the next one.</p>
+            <p>This is similar to solving a recursion problem. In order to solve the first case, we have to solve the second case; to solve the second case, we have to solve the third case... Until it reach the base. In this case we start at Pirate 1 and stop at Pirate 5.</p>
+            <h2>Situation of only pirate 5 alives</h2>
+            <p>Let's start up with the situation that everytime most of the pirates vote against. Of course, this is the case that only happens if every pirate are having suicidal thoughts, or without a human brain to think. However that doesn't mean we don't need to consider this case, because all other pirates would make their proposal by infering the next pirate's proposal.</p>
+            <p>Indeed, the 5th pirate would take all the coins. Even if he is the person who is so kind that would like to giveaway all the coins, he has no one to give.</p>
+            <p>So in this case he would get all 100 coins.</p>
+            <h2>Situation of pirate 4 and above alive</h2>
+            <p>Pirate 4 would give 100 coins to himself, none for Pirate 5.</p>
+            <p>Whatever how Pirate 4 proposes, Pirate 5 would vote against. So even if what Pirate 4 proposes is extremely biased, the proposal would still pass because Pirate 4 has the opportunity to vote for himself. Which makes half of the survived people vote "for".</p>
+            <h2>Situation of pirate 3 and above alive</h2>
+            <p>Pirate 3 would give 99 coins to himself, none to Pirate 4, and 1 coin to Pirate 5.</p>
+            <p>Since Pirate 4 would vote "against" in all situations, Pirate 4 can threaten Pirate 5 that if he also votes "against", he will get nothing from Pirate 4. However if he votes "for", he will get 1 coins which is more than what Pirate 4 will propose.</p>
+            <h2>Situation of pirate 2 and above alive</h2>
+            <p>Pirate 2 would give 99 coins to himself, none to Pirate 3, 1 coin to Pirate 4, and none to Pirate 5.</p>
+            <p>Pirate 3 would always vote "against", so it is better to give him nothing. Pirate 2 can threaten Pirate 4 that if he vote "against", he will get nothing from pirate 3. Pirate 5 is more expensive than Pirate 4, and we already have two pirates including pirate 2 himself vote "for", which is over 50%.</p>
+            <h2>Situation of all the piates alive.</h2>
+            <p>Pirate 1 would give 98 coins to himself, none to Pirate 2, 1 coin to Pirate 3, none to Pirate 4, and 1 coin to Pirate 5.</p>
+            <p>This time we will only get 98 coins because we need 3 people's agree in order to pass the proposal.</p>
+            <p>Pirate 2 would vote "against" at all time. Threaten Pirate 3 to vote or else Pirate 2 won't give him anything. None to Pirate 4 because he is too expensive. 1 to Pirate 5 as he has the same situation as Pirate 3.</p>
+            <h2>Graph</h2>
+            <p>Organize the datas into the table.</p>
+            <table style="margin-left: 20px; border: 1px solid #000;">
+                <tbody>
+                    <tr>
+                        <th>Pirates</th>
+                        <th>Pirate 5 alive</th>
+                        <th>Pirate 4, 5 alive</th>
+                        <th>Pirate 3, 4, 5 alive</th>
+                        <th>Pirate 2, 3, 4, 5 alive</th>
+                        <th>All Pirates alive</th>
+                    </tr>
+                    <tr>
+                        <td>Pirate 5</td>
+                        <td>100</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Pirate 4</td>
+                        <td>-</td>
+                        <td>100</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Pirate 3</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>99</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Pirate 2</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>99</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Pirate 1</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>98</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>You may notice that for every pirate that will have something to get by the next proposal, the proposal would be give them nothing. On the contrary, if they won't have anything by the next proposal, they will get 1 coin for the current proposal.</p>
+        </div>
+        <div id="start">
+            <h1>Math Problem of Pirates and Coins</h1>
+            <h2>Mathematics 9: Problem Index 1</h2>
+            <p style="width: 50%;">"Five cunning pirates that are very good at math are trying to split 100 gold coins amongst them. Each pirate wants to maximize their share and get as much gold as possible. (hint: gold will not be divided evenly). Each pirate will get a number from 1 to 5 and they take turns to make a proposal on how to split the gold. For instance, pirate number 1 will make his proposal and the group will vote 'for' or 'against' it. If they vote 'for' it then the gold will be split accordingly. However, if they vote 'against' it then pirate 1 will be kicked off the boat and gets nothing, and then pirate 2 goes next...and so on. In order for a proposal to be accepted half or more of the people alive need to vote for it.</p>
+            <p style="width: 50%; color: #ff0000;">What proposal should pirate 1 make to maximize his share?"</p>
+            <div style="position: absolute; bottom: 0;">
+                <p>Coby Qiu</p>
+                <div id="startBTN">Start</div>
+            </div>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
